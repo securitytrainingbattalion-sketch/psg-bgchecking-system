@@ -3033,7 +3033,18 @@
       const btn = document.getElementById("submit-appeal-btn");
       btn.disabled = true;
 
-      const username = state.verifiedAppealRecord.username;
+      const username = String(
+  state.verifiedAppealRecord.username ||
+  document.getElementById("app-roblox-username").value ||
+  document.getElementById("appeal-check-username").value ||
+  ""
+).trim();
+
+if (!username) {
+  alert("Unable to identify the verified Roblox username. Please verify your eligibility again.");
+  btn.disabled = false;
+  return;
+}
       const tpnpRank = document.getElementById("app-tpnp-rank").value.trim();
       const discordId = document.getElementById("app-discord-id").value.trim();
       const robloxId = document.getElementById("app-roblox-id").value.trim();
